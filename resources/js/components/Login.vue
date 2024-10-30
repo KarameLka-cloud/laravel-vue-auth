@@ -14,7 +14,7 @@ function login() {
                 password: password
             })
                 .then(response => {
-                    console.log(response);
+                    console.log(response.config.data);
                     router.push({name: 'get.index'})
                     // localStorage.setItem('x_xsrf_token', response.data.token);
 

@@ -1,4 +1,8 @@
 <script setup>
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
+
 let name = '';
 let email = '';
 let password = '';
@@ -13,8 +17,15 @@ function register() {
                 password: password,
                 password_confirmation: password_confirmation
             })
+                // .then(response => {
+                //     console.log(response);
+                //     router.push({name: 'get.index'});
+                // })
                 .then(response => {
-                    console.log(response);
+                    axios.post('/logout')
+                        .then(response => {
+                            router.push({name: 'user.login'});
+                        })
                 })
         })
 }

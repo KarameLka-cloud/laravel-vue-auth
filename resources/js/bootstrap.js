@@ -7,11 +7,20 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+import router from "./router.js";
 window.axios = axios;
+
+// const router = useRouter();
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
+
+window.axios.interceptors.response.use({}, err => {
+    if (err.response.status === 401 || err.response.status === 419) {
+        router.push({name: 'user.login'});
+    }
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
